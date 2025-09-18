@@ -1,0 +1,114 @@
+.btn4{
+background-color: #F7C32E;
+width: 15vw;
+color: #ffffff !important;
+font-family: "Roboto Condensed", sans-serif;
+margin-left: 700px;
+margin-top: 50px;
+border-color: #F7C32E;
+border-radius: 25px;
+font-size: 1.3em;
+padding-left: 27px !important;
+padding: 10px 20px;
+}
+
+.btn4:hover{
+background-color: #000;
+}
+
+.video-row h2 {
+color: #201e1e !important;
+font-family: "Roboto Condensed", sans-serif !important;
+font-size: 4px !important;
+}
+  
+.display-3 {
+font-family: "Aclonica", sans-serif;
+font-size: 50px;
+color: #4CAF50;
+display: flex;
+justify-content: center;
+padding: 30px;
+}
+
+*{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+.div-image {
+width: 70vw;
+height: 45vh;
+border-radius: 20px;
+}
+
+.div-conseils {
+display: block;
+align-items: center;
+justify-content: center;
+}
+.conseil1 {
+display: block;
+justify-content: center;
+align-items: center;
+text-align: center;
+}
+
+.conseilsh3 {
+font-size: 30px;
+font-family: "Aclonica", sans-serif;
+color: #4CAF50;
+padding: 30px;
+text-align: center;
+}
+
+.div-conseils p {
+font-family: "Roboto Condensed", sans-serif;
+font-size: 20px;
+text-align: center;
+}
+
+.div-image2{
+width: 84vw;
+height: 130vh;
+padding-left: 350px;
+}
+
+.conseilsh3 > span{
+font-family: "Roboto Condensed", sans-serif;
+font-weight: bold;
+font-size: 20px;
+}
+
+.conseil2{
+display: block;
+align-items: center;
+justify-content: center;
+text-align: center;
+margin-left: 100px;
+}
+
+.conseil2 p {
+font-weight: lighter;
+}
+
+.mes-recettes-list {
+  display: flex;
+  flex-direction: column; /* Une en dessous de l’autre */
+  align-items: center; /* Centrer horizontalement */
+  gap: 30px; /* Espacement entre les vidéos */
+}
+
+.video-card {
+  width: 100%;
+  max-width: 600px; /* largeur max d’une vidéo */
+  text-align: center;
+}
+.btn btn-danger nav-link{
+  background-color: green;
+
+}
+.btn btn-danger nav-link:hover{
+  background-color: #0e0000;
+}
