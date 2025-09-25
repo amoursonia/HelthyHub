@@ -8,6 +8,10 @@ const MesRecettes = () => {
   const [message, setMessage] = useState('');
   const [recettes, setRecettes] = useState([]);
 
+  // États pour modification
+  const [editId, setEditId] = useState(null);
+  const [editTitle, setEditTitle] = useState('');
+
   const email = localStorage.getItem('email'); // Email utilisateur connecté
 
   // Transformer automatiquement les liens YouTube en /embed/
@@ -58,14 +62,41 @@ const MesRecettes = () => {
 
     try {
       const res = await axios.delete(`http://localhost:5000/api/recettes/${id}`, {
-        data: { email } // axios utilise `data` pour envoyer le body avec DELETE
+        data: { email }
       });
-      console.log(res.data);
       setRecettes(recettes.filter((recette) => recette.id !== id));
       setMessage(res.data.message || 'Recette supprimée ✅');
     } catch (err) {
       console.error('Erreur lors de la suppression :', err);
       setMessage(err.response?.data?.message || 'Erreur lors de la suppression ❌');
+    }
+  };
+
+  // Démarrer la modification
+  const startEdit = (recette) => {
+    setEditId(recette.id);
+    setEditTitle(recette.title);
+  };
+
+  // Annuler la modification
+  const cancelEdit = () => {
+    setEditId(null);
+    setEditTitle('');
+  };
+
+  // Sauvegarder la modification
+  const saveEdit = async (id) => {
+    try {
+      const res = await axios.put(`http://localhost:5000/api/recettes/${id}`, {
+        title: editTitle,
+        email
+      });
+      setMessage(res.data.message);
+      setEditId(null);
+      setEditTitle('');
+      fetchMesRecettes(); // rafraîchit la liste
+    } catch (err) {
+      setMessage(err.response?.data?.message || 'Erreur lors de la modification ❌');
     }
   };
 
@@ -120,13 +151,51 @@ const MesRecettes = () => {
                     title={recette.title}
                     allowFullScreen
                   ></iframe>
-                  <h3 className="mt-3">{recette.title}</h3>
-                  <button
-                    className="btn btn-danger mt-2"
-                    onClick={() => handleDelete(recette.id)}
-                  >
-                    Supprimer
-                  </button>
+
+                  {/* Titre ou champ d'édition */}
+                  {editId === recette.id ? (
+                    <input
+                      type="text"
+                      className="form-control mt-3"
+                      value={editTitle}
+                      onChange={(e) => setEditTitle(e.target.value)}
+                    />
+                  ) : (
+                    <h3 className="mt-3">{recette.title}</h3>
+                  )}
+
+                  {/* Boutons */}
+                  {editId === recette.id ? (
+                    <div className="d-flex justify-content-center gap-2 mt-2">
+                      <button
+                        className="btn btn-primary"
+                        onClick={() => saveEdit(recette.id)}
+                      >
+                        💾 Sauvegarder
+                      </button>
+                      <button
+                        className="btn btn-secondary"
+                        onClick={cancelEdit}
+                      >
+                        ❌ Annuler
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="d-flex justify-content-center gap-2 mt-2">
+                      <button
+                        className="btn btn-danger"
+                        onClick={() => handleDelete(recette.id)}
+                      >
+                        Supprimer
+                      </button>
+                      <button
+                        className="btn btn-warning"
+                        onClick={() => startEdit(recette)}
+                      >
+                        Modifier
+                      </button>
+                    </div>
+                  )}
                 </div>
               ))
             ) : (

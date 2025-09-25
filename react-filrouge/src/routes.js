@@ -2,8 +2,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
-import HomePage from './pages/HomePage';
-import ErrorPage from './pages/ErrorPage';
+import HomePage from './pages/HomePage'; 
 import Navbar from './components/Navbar';
 import LoginPage from './pages/LoginPage';
 import PasswordPage from './pages/PasswordPage';
@@ -62,8 +61,7 @@ const RoutesConfig = () => {
         <Route path="/forgottenpassword" element={<PasswordPage />} />
         <Route path="/hygiene" element={<HygienePage />} />
         <Route path="/recettes" element={<Recettes isLoggedIn={isLoggedIn} />} />
-        <Route path="/conseils" element={<Conseils />} />
-        <Route path="*" element={<ErrorPage />} />
+        <Route path="/conseils" element={<Conseils />} /> 
       </Routes>
     </Router>
   );

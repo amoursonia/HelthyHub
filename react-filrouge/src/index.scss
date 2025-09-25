@@ -2,17 +2,7 @@
 
 body {
   background-color: #FEE6CA;
-}
-
-.error {
-font-family: "Roboto Condensed", sans-serif;
-color: #ed2424;
-font-size: 2.2em;
-padding-left: 700px;
-padding-top: 300px;
-
-}
-
+} 
 .container-fluid1 {
   width: 100%;
   height: 4em;
@@ -25,7 +15,7 @@ padding-top: 300px;
   img{
     display: block;
     position: absolute;
-    left: 80px;
+    object-fit: cover;
   }
 }
 
@@ -37,11 +27,11 @@ padding-top: 300px;
 a {
   text-decoration: none; /* Enlève le soulignement par défaut */
   color: inherit !important; /* Garde la couleur du lien non survolé */
-  position: relative; /* Nécessaire pour le positionnement du pseudo-élément */
+ /* position: relative; /* Nécessaire pour le positionnement du pseudo-élément */
 }
 
 .nav-link::after {
-  content: '';
+ /* content: '';*/
   display: block;
   width: 0;
   height: 3px; /* Épaisseur du trait */
@@ -73,9 +63,9 @@ flex-direction: row;
 justify-content: center;
 }
 
-.navbar-nav {
+.navbar- nav {
 justify-content: space-evenly;
-padding-left: 111px;
+/*padding-left: 111px;*/
 }
 
 .navbar {
@@ -142,44 +132,42 @@ padding-left: 111px;
 }
 
 .image-content {
-  width: 40%;
+  width: 100%;
+  overflow: hidden;
   img {
     display: block;
     position: relative;
     left: 185px;
     bottom: 60px;
+
+    object-fit: cover
   }
 }
 
 .form-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
-}
-
-.btn{
-  padding: 0.6rem 0.5rem !important;
+  justify-content: center;  /* centre horizontalement */
+  align-items: center;  /* vertical : top pour pouvoir décaler */
+  min-height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding-top: 1000px;       /* ✅ descend le formulaire */
 }
 
 form {
   display: flex;
   flex-direction: column;
   width: 500px;
+  max-width: 90%;
   padding: 20px;
   border: solid rgba(0, 0, 0, 0.138);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
   border-radius: 10px;
-  background-color: #fff4e4;
-  margin-top: 100px; /* Ajoute un espacement entre le bas de la navbar et le formulaire */
+  background-color: #fff4e4; 
   font-family: "Roboto Condensed", sans-serif;
-  letter-spacing: 1px;
-  border-collapse: collapse;
+  letter-spacing: 1px; 
   text-align: center;
-}
-
-.form-label{
-  color: #000;
+  margin: 50px auto 0 auto;           /* centre horizontalement */
 }
 
 .titre > h1 {
@@ -236,7 +224,9 @@ form {
   color: #ffffff;
   border-radius: 20px;
 }
-
+.btnbtn-sec:hover{
+  background-color: #000000 !important;
+}
 .btn-secondary {
 margin: 0 auto;
 display: flex;
@@ -371,4 +361,127 @@ footer p {
   width: 100%;
   max-width: 600px; /* largeur max d’une vidéo */
   text-align: center;
+}
+/* =========================
+   Navbar CSS
+========================= */
+
+/* Navbar container */
+.container-fluid1 {
+  width: 100%;
+  height: 4em;
+  border: #3f944277 solid 1px;
+  background-color: #fbebda;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  position: relative; 
+  padding-top: 5px;
+}
+
+/* Logo */
+.container-fluid1 img {
+  display: block;
+  position: absolute;
+  object-fit: cover;
+  height: 50px;
+  padding-left: 10px;
+}
+
+/* -------------------------
+   Navbar links
+------------------------- */
+.navbar-nav {
+  display: flex;             /* ✅ active le flex pour aligner les liens */
+  flex-direction: row;       /* ✅ horizontal par défaut sur desktop */
+  padding-left: 0;           /* ✅ supprime le padding par défaut des UL */
+  margin-bottom: 0;          /* ✅ supprime la marge par défaut */
+  list-style: none;          /* ✅ supprime les puces */
+  justify-content: space-around; /* ✅ espace les liens comme tu veux */
+  align-items: center;
+}
+
+.nav-link {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 1.2em;
+  text-align: center;
+}
+
+/* -------------------------
+   Burger menu
+------------------------- */
+.navbar-toggler {
+  display: none; /* desktop = caché */
+  flex-direction: column;
+  justify-content: space-between;
+  width: 60px;
+  height: 22px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.burger-bar {
+  width: 100%;
+  height: 3px;
+  background-color: #1d972c;
+  border-radius: 2px;
+}
+
+/* -------------------------
+   Mobile menu
+------------------------- */
+@media (max-width: 991px) {
+  .navbar-toggler {
+    display: flex; /* ✅ burger visible */
+  }
+
+  .navbar-nav {
+    flex-direction: column;
+    align-items: flex-start; /* ✅ menu collé à gauche du burger */
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.4s ease-in-out;
+    width: 110px; /* ✅ menu plus étroit */
+    position: absolute; /* ✅ menu flottant à côté du burger */
+    top: 50px; /* ✅ juste en dessous de la navbar */
+    right: 10px; /* ✅ à côté du burger */
+    background-color: #fbebda;
+    box-shadow: 0 4px 8px green (0, 0, 0, 0.2);
+    z-index: 999; /* ✅ au-dessus du contenu */
+    padding: 1px 20px;
+}
+
+  .navbar-nav.nav-open {
+    max-height: 500px;           /* ✅ menu ouvert */
+  }
+
+  .nav-link {
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+  }
+}
+
+/* -------------------------
+   Desktop styling
+------------------------- */
+@media (min-width: 992px) {
+  .nav-link {
+    padding: 0 15px; /* ✅ espace entre les liens */
+  }
+}
+
+/* -------------------------
+   Buttons
+------------------------- */
+.btn-danger.nav-link {
+  color: #fff;
+  background-color: green;
+  border-radius: 10px;
+  border: none;
+}
+
+.btn-danger.nav-link:hover {
+  background-color: #000000;
+  border-color: #000;
 }
