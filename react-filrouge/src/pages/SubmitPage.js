@@ -1,17 +1,17 @@
 /* eslint-disable */
 
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
 
 const SubmitPage = () => {
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    dob: '',
-    password: ''
+    firstName: "",
+    lastName: "",
+    email: "",
+    dob: "",
+    password: "",
   });
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -19,8 +19,12 @@ const SubmitPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const baseURL = process.env.REACT_APP_API_URL || "http://";
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/register', formData);
+      const res = await axios.post(
+        `${baseURL}/api/auth/register` / api / auth / register,
+        formData
+      );
       setMessage(res.data.message);
     } catch (err) {
       setMessage(err.response?.data?.message || "Erreur d'inscription ❌");

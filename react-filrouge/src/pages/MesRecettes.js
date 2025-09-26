@@ -26,9 +26,10 @@ const MesRecettes = () => {
 
   // Récupérer les recettes de l'utilisateur
   const fetchMesRecettes = async () => {
+    const baseURL = process.env.REACT_APP_API_URL || "http://localhost:5000"
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/recettes/user/${encodeURIComponent(email)}`
+        `${baseURL}/api/recettes/user/${encodeURIComponent(email)}`
       );
       setRecettes(res.data);
     } catch (err) {
@@ -41,7 +42,7 @@ const MesRecettes = () => {
     e.preventDefault();
     try {
       const embedUrl = transformYoutubeUrl(video);
-      const res = await axios.post('http://localhost:5000/api/recettes', {
+      const res = await axios.post(`${baseURL}:///api/recettes`, {
         title,
         video: embedUrl,
         email
@@ -59,9 +60,9 @@ const MesRecettes = () => {
   // Supprimer une recette
   const handleDelete = async (id) => {
     if (!window.confirm('Voulez-vous vraiment supprimer cette recette ?')) return;
-
+    const baseURL = process.env.REACT_APP_API_URL || "http://localhost:5000";
     try {
-      const res = await axios.delete(`http://localhost:5000/api/recettes/${id}`, {
+      const res = await axios.delete(`${baseURL}/api/recettes/${id}`, {
         data: { email }
       });
       setRecettes(recettes.filter((recette) => recette.id !== id));
@@ -86,8 +87,9 @@ const MesRecettes = () => {
 
   // Sauvegarder la modification
   const saveEdit = async (id) => {
+    const baseURL = process.env.REACT_APP_API_URL || "http://localhost:5000";
     try {
-      const res = await axios.put(`http://localhost:5000/api/recettes/${id}`, {
+      const res = await axios.put(`${baseURL}/api/recettes/${id}`, {
         title: editTitle,
         email
       });
