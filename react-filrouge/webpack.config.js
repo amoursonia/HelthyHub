@@ -1,12 +1,15 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+const webpack = require("webpack");
 
 module.exports = {
   entry: "./src/index.js",
   output: {
     filename: "src/[name].[fullhash].js",
     path: path.resolve(__dirname, "dist"),
+    publicPath: "/", // ✅ important pour React Router
   },
   module: {
     rules: [
@@ -16,7 +19,7 @@ module.exports = {
         use: {
           loader: "babel-loader",
           options: {
-            presets: ["@babel/preset-env"],
+            presets: ["@babel/preset-env", "@babel/preset-react"], // ✅ React JSX
             plugins: ["@babel/plugin-proposal-object-rest-spread"],
           },
         },
@@ -33,12 +36,15 @@ module.exports = {
           },
         ],
       },
-      { test: /\.ts$/, use: "ts-loader" },
+      {
+        test: /\.ts$/,
+        use: "ts-loader",
+      },
     ],
   },
 
   devServer: {
-    historyApiFallback: true,
+    historyApiFallback: true, // ✅ routes React OK en dev
     host: "127.0.0.1",
     port: 9090,
     open: true,
@@ -51,6 +57,7 @@ module.exports = {
     },
     webSocketServer: "ws",
   },
+
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "src/index.html"),
@@ -61,6 +68,12 @@ module.exports = {
       extensions: "js",
       exclude: "node_modules",
       files: "./src/",
+    }),
+    new CopyWebpackPlugin({
+      patterns: [{ from: "_redirects", to: "" }], // ✅ copie dans dist/
+    }),
+    new webpack.DefinePlugin({
+      "process.env.REACT_APP_API_URL": JSON.stringify(process.env.REACT_APP_API_URL),
     }),
   ],
 };
