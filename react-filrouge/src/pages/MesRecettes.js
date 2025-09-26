@@ -26,7 +26,7 @@ const MesRecettes = () => {
 
   // Récupérer les recettes de l'utilisateur
   const fetchMesRecettes = async () => {
-    const baseURL = process.env.REACT_APP_API_URL || "http://localhost:5000"
+    const baseURL = process.env.REACT_APP_API_URL || "http://localhost:5000";
     try {
       const res = await axios.get(
         `${baseURL}/api/recettes/user/${encodeURIComponent(email)}`
@@ -40,9 +40,10 @@ const MesRecettes = () => {
   // Ajouter une nouvelle recette
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const baseURL = process.env.REACT_APP_API_URL || "http://localhost:5000";
     try {
       const embedUrl = transformYoutubeUrl(video);
-      const res = await axios.post(`${baseURL}:///api/recettes`, {
+      const res = await axios.post(`${baseURL}/api/recettes`, {
         title,
         video: embedUrl,
         email

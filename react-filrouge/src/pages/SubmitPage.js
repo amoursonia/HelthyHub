@@ -19,10 +19,10 @@ const SubmitPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const baseURL = process.env.REACT_APP_API_URL || "http://";
+    const baseURL = process.env.REACT_APP_API_URL || "http://localhost:5000";
     try {
       const res = await axios.post(
-        `${baseURL}/api/auth/register` / api / auth / register,
+        `${baseURL}/api/auth/register`,
         formData
       );
       setMessage(res.data.message);

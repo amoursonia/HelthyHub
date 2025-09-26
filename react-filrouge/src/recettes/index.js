@@ -33,7 +33,7 @@ const VideoRecettes = ({ recettes }) => (
 
 const Recettes = ({ isLoggedIn }) => {
   const [recettes, setRecettes] = useState([]);
-
+const baseURL = process.env.REACT_APP_API_URL || "http://localhost:5000";
   useEffect(() => {
     fetch(`${baseURL}/api/recettes`)
       .then((res) => res.json())
